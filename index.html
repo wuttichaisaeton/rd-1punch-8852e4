@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#efe7d6">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noimageindex">
+<meta name="robots" content="noai, noimageai">
+<title>Kitchen by Rough Design</title>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+<style>
+  /* ── Flux Architect (brand font, matches the drawings) ── */
+  @font-face{font-family:'Flux Architect';src:url('./fonts/Flux Architect Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+  @font-face{font-family:'Flux Architect';src:url('./fonts/Flux Architect Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
+  @font-face{font-family:'Flux Architect';src:url('./fonts/Flux Architect Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap}
+  @font-face{font-family:'Flux Architect';src:url('./fonts/Flux Architect Bold Italic.ttf') format('truetype');font-weight:700;font-style:italic;font-display:swap}
+
+  :root{
+    --paper:#efe7d6; --paper2:#f7f2e7; --ink:#000; --ink-soft:#333;
+    --pen:#000; --faint:#c7bda6; --accent:#b23a2b;
+    --pen-sh:2px 2px 0 rgba(27,24,21,.20);
+    --wob:16px 22px 14px 20px/20px 14px 22px 16px;
+    --wob2:9px 13px 7px 11px/11px 7px 13px 9px;
+    --fx:'Flux Architect',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--paper); color:var(--ink); font-family:var(--fx); overflow:hidden; -webkit-font-smoothing:antialiased}
+  /* aged-paper vignette (from the web sketch theme) */
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:8;
+    background:radial-gradient(130% 120% at 50% 42%,transparent 58%,rgba(70,55,30,.20) 100%);mix-blend-mode:multiply}
+
+  .stage{position:fixed;inset:0}
+  model-viewer{position:absolute;inset:0;width:100%;height:100%;z-index:1;
+    background:var(--paper); --poster-color:var(--paper);
+    --progress-bar-color:var(--accent); --progress-bar-height:3px}
+
+  /* ── drawn card helper ── */
+  .card{background:var(--paper2);border:2px solid var(--pen);box-shadow:var(--pen-sh);border-radius:var(--wob2)}
+
+  /* ── top: brand · project ── */
+  .top{position:absolute;z-index:5;top:0;left:0;right:0;display:flex;justify-content:space-between;
+    align-items:flex-start;padding:clamp(14px,3vw,26px);pointer-events:none;gap:12px;animation:fade .7s .1s both}
+  .brand{line-height:1}
+  .brand .mark{font-size:clamp(16px,2vw,21px);color:var(--ink)}
+  .brand .mark span{font-weight:400;opacity:.7} .brand .mark b{font-weight:700}
+  .brand .rule{margin-top:6px;height:6px;width:70px;background:repeating-linear-gradient(-52deg,var(--accent) 0 2px,transparent 2px 5px)}
+  .brand small{display:block;margin-top:8px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);font-style:italic}
+  .proj{text-align:right;max-width:60%}
+  .proj .name{font-size:clamp(20px,3.2vw,32px);font-weight:700;text-transform:uppercase;letter-spacing:.02em;
+    color:var(--paper2);-webkit-text-stroke:1.1px var(--pen);text-shadow:2px 2px 0 var(--pen),4px 4px 0 rgba(27,24,21,.18);word-break:break-word}
+  .proj .tag{margin-top:6px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:700}
+
+  /* ── dimensions plate (bottom-left) ── */
+  .dimwrap{position:absolute;z-index:5;left:clamp(14px,3vw,26px);bottom:clamp(16px,3vw,26px);
+    display:flex;flex-direction:column;align-items:flex-start;gap:9px;animation:rise .7s .3s both}
+  .dims{display:flex;overflow:hidden}
+  .dims div{padding:9px 15px 8px;min-width:78px;border-right:2px solid var(--pen)}
+  .dims div:last-child{border-right:0}
+  .dims .k{font-size:9px;letter-spacing:.2em;color:var(--ink-soft);text-transform:uppercase}
+  .dims .v{display:flex;align-items:baseline;margin-top:2px}
+  .dims .v .dv{font-family:var(--fx);font-size:16px;font-weight:700;color:var(--ink);
+    background:transparent;border:0;width:52px;padding:0;outline:none;pointer-events:none;
+    appearance:textfield;-moz-appearance:textfield;-webkit-touch-callout:none}
+  .dims .v .dv::-webkit-outer-spin-button,.dims .v .dv::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+  .dims .v span{font-size:10px;color:var(--ink-soft);margin-left:3px}
+  .dims.editing .v .dv{pointer-events:auto;border-bottom:2px dashed var(--accent);cursor:text}
+  .dims.editing .v .dv:focus{border-bottom-style:solid}
+  /* :not(.show) beats the later `.btn{display:inline-flex}` (0-2-0 > 0-1-0) —
+     plain `.dimcopy` lost to it and the button showed for EVERYONE */
+  .dimcopy:not(.show){display:none} .dimcopy.show{display:inline-flex}
+  .dimcopy .ok{color:var(--accent);font-weight:700;margin-left:6px;opacity:0;transition:opacity .2s}
+  .dimcopy .ok.show{opacity:1}
+  .btn.icon{padding:11px 12px}
+
+  /* (3D dimension callouts removed — เอ๋ 2026-07-09 "เอาป้ายออกทั้งหมด") */
+
+  /* ── controls (bottom-right): open + AR ── */
+  .ctl{position:absolute;z-index:5;right:clamp(14px,3vw,26px);bottom:clamp(16px,3vw,26px);display:flex;gap:10px;animation:rise .7s .42s both}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 17px;cursor:pointer;font-family:var(--fx);
+    font-size:14px;font-weight:700;color:var(--ink);background:var(--paper2);border:2px solid var(--pen);
+    box-shadow:var(--pen-sh);border-radius:var(--wob2);transition:transform .12s,background .12s;-webkit-tap-highlight-color:transparent}
+  .btn:hover{background:#ece3cd} .btn:active{transform:translate(2px,2px);box-shadow:none}
+  .btn svg{width:17px;height:17px}
+  .btn.on{background:var(--accent);color:var(--paper2)}
+  .btn.ar{display:none} .btn.ar.show{display:inline-flex}
+  /* red Open-door button, cabinet pages only (เอ๋ 2026-07-09) */
+  .btn.openred{background:var(--accent);color:var(--paper2)}
+  .btn.openred:hover{background:#9b3225}
+
+  /* ── hint ── */
+  .hint{position:absolute;z-index:5;left:50%;bottom:clamp(16px,3vw,26px);transform:translateX(-50%);
+    font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);
+    display:flex;align-items:center;gap:8px;white-space:nowrap;transition:opacity .5s;animation:fade .8s .7s both}
+  .hint .dot{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 1.8s infinite}
+  .hint.gone{opacity:0}
+
+  /* ── edit panel (owner only, ?edit=1) ── */
+  .edit{position:absolute;z-index:6;top:50%;left:50%;transform:translate(-50%,-50%);padding:22px 24px;
+    max-width:92vw;background:var(--paper2);border:2px solid var(--pen);box-shadow:var(--pen-sh);border-radius:var(--wob);display:none}
+  .edit.show{display:block;animation:rise .3s both}
+  .edit h3{font-size:14px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+  .edit p{font-size:11px;color:var(--ink-soft);margin-bottom:16px}
+  .edit .row{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+  .edit label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:5px}
+  .edit input{width:92px;padding:9px 11px;font-family:var(--fx);font-size:16px;font-weight:700;color:var(--ink);
+    background:var(--paper);border:2px solid var(--pen);border-radius:8px}
+  .edit .acts{display:flex;gap:10px;flex-wrap:wrap}
+  .edit .copied{font-size:11px;color:var(--accent);margin-top:10px;font-weight:700;opacity:0;transition:opacity .2s}
+  .edit .copied.show{opacity:1}
+
+  /* ── loading ── */
+  .load{position:absolute;z-index:9;inset:0;display:grid;place-items:center;background:var(--paper);transition:opacity .6s;text-align:center}
+  .load.done{opacity:0;pointer-events:none}
+  .load .spin{width:32px;height:32px;border-radius:50%;border:2px solid var(--faint);border-top-color:var(--accent);animation:spin 1s linear infinite;margin:0 auto 16px}
+  .load .lt{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft)}
+  .load .pct{font-size:11px;color:var(--accent);margin-top:7px;font-weight:700}
+
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.6)}}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  @keyframes rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+  /* ── phone layout (เอ๋ 2026-07-09 "มือถือดูไม่รู้เรื่อง"): stack from the
+        bottom — ctl row pinned at the very bottom, plate full-width above it,
+        hint moved to the top; nothing overlaps. ── */
+  @media (max-width:560px){
+    .top{align-items:center}
+    .hint{top:clamp(92px,17vw,122px);bottom:auto}
+    .dimwrap{left:10px;right:10px;bottom:74px}
+    .dimcopy.show{width:100%;justify-content:center}
+    .dims{width:100%}
+    .dims div{flex:1;min-width:0;padding:8px 10px 7px}
+    .dims .v .dv{font-size:15px}
+    .ctl{left:10px;right:10px;bottom:12px;justify-content:center;flex-wrap:wrap;gap:8px}
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <model-viewer id="mv"
+    alt="Custom stainless kitchen by Rough Design"
+    camera-controls touch-action="pan-y"
+    interaction-prompt="none" orientation="0deg -90deg 0deg"
+    camera-orbit="22deg 72deg 105%" field-of-view="11deg"
+    min-field-of-view="4deg" max-field-of-view="45deg"
+    min-camera-orbit="auto 0deg 5%" max-camera-orbit="auto 180deg 900%"
+    exposure="1.15" tone-mapping="neutral" shadow-intensity="0" environment-image="neutral"
+    ar ar-modes="webxr scene-viewer quick-look" ar-scale="fixed">
+    <div slot="progress-bar"></div>
+  </model-viewer>
+
+  <div class="top">
+    <div class="brand">
+      <div class="mark"><span>rough</span><b>design</b></div>
+      <div class="rule"></div>
+      <small>Stainless Kitchen Studio</small>
+    </div>
+    <div class="proj">
+      <div class="name" id="pName">Kitchen</div>
+      <div class="tag">Full Kitchen · 3D</div>
+    </div>
+  </div>
+
+  <div class="dimwrap">
+    <button class="btn dimcopy" id="copyBtn">Copy customer link<span class="ok" id="copyOk">✓</span></button>
+    <!-- dims plate hidden (เอ๋ 2026-07-09 "icon ที่แสดงขนาดทั้งหมดเอาออก มันรก") —
+         inputs stay in DOM: Copy-customer-link still bakes w/d/h from them -->
+    <div class="dims card" id="dimsPlate" style="display:none">
+      <div><div class="k">Width</div><div class="v"><input class="dv" id="dW" type="number" inputmode="numeric"><span>mm</span></div></div>
+      <div><div class="k">Depth</div><div class="v"><input class="dv" id="dD" type="number" inputmode="numeric"><span>mm</span></div></div>
+      <div><div class="k">Height</div><div class="v"><input class="dv" id="dH" type="number" inputmode="numeric"><span>mm</span></div></div>
+    </div>
+  </div>
+
+  <div class="hint" id="hint"><span class="dot"></span>Drag to rotate · pinch to zoom</div>
+
+  <div class="ctl">
+    <button class="btn" id="backBtn" style="display:none">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Full kitchen
+    </button>
+    <button class="btn" id="vTop">Top</button>
+    <button class="btn" id="vLeft">Left</button>
+    <button class="btn" id="vRight">Right</button>
+    <button class="btn" id="vIso">Iso</button>
+    <button class="btn openred" id="openBtn" style="display:none">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h9v16H4z"/><path d="M13 8h7v12h-7"/><path d="M9.5 12h.01"/></svg>
+      <span id="openLbl">Open doors</span>
+    </button>
+    <button class="btn ar" id="arBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="m12 8.5 4.5 2.5v4L12 17l-4.5-2v-4L12 8.5Zm0 0V13m0 0 4.5-2M12 13l-4.5-2"/></svg>
+      In your room
+    </button>
+  </div>
+
+  <div class="load" id="load"><div><div class="spin"></div><div class="lt">Preparing your kitchen</div><div class="pct" id="pct">0%</div></div></div>
+</div>
+
+<script type="module">import*as b from"https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.module.js";import{initDimOverlay as _initDim}from"./dim.js";const q="./",v=new URLSearchParams(location.search),A="1 Punch",Z=!!(v.get("w")&&v.get("d")&&v.get("h")),K=v.get("edit")==="1"||!Z&&v.get("edit")!=="0";if(v.get("admin")==="1")try{localStorage.setItem("kd_admin_v1","1")}catch{}let D=!1;try{D=localStorage.getItem("kd_admin_v1")==="1"}catch{}const d=e=>document.getElementById(e),u=d("mv"),P=d("load"),Q=d("pct"),j=d("hint"),E=!/^[A-Z0-9]{6}-[A-Z0-9]{6}$/i.test(A),U=(v.get("from")||"").trim();d("pName").textContent=A,document.title=A+" \xB7 Kitchen by Rough Design";try{document.querySelector(".proj .tag").textContent=E?"Full Kitchen \xB7 3D":"Cabinet \xB7 3D"}catch{}const H="12deg 67deg 105%",$="-24deg 73deg 131%";u.setAttribute("camera-orbit",$),u.addEventListener("load",()=>{setTimeout(()=>{u.cameraOrbit=H},350)},{once:!0}),u.src=q+encodeURIComponent(A)+".glb",u.addEventListener("progress",e=>{const t=Math.round((e.detail.totalProgress||0)*100);Q.textContent=t+"%",e.detail.totalProgress>=1&&setTimeout(()=>P.classList.add("done"),250)});const J=()=>{try{const e=Object.getOwnPropertySymbols(u).find(t=>t.toString()==="Symbol(scene)");return e?u[e]:null}catch{return null}};let g=null,N=!1;function ee(){N||!g||(N=!0,g.traverse(e=>{if(!e.isMesh||!e.geometry?.attributes?.position)return;let t=!1;for(let n=e.parent;n;n=n.parent)if(n.name==="world"){t=!0;break}if(t){try{const n=Array.isArray(e.material)?e.material:[e.material];for(const r of n)r&&(r.color&&r.color.setRGB(.92,.9,.85),"metalness"in r&&(r.metalness=0),"roughness"in r&&(r.roughness=.95),r.needsUpdate=!0)}catch{}try{const n=new b.EdgesGeometry(e.geometry,22),r=new b.LineBasicMaterial({color:1775637,transparent:!0,opacity:.95,depthTest:!0,depthWrite:!1}),s=new b.LineSegments(n,r);s.renderOrder=2,e.add(s)}catch{}}}))}function te(){const e=+v.get("w"),t=+v.get("d"),n=+v.get("h");if(e&&t&&n)return{w:e,d:t,h:n};try{const r=g&&g.getObjectByName("world")||g,s=new b.Box3;if(r.traverse(o=>{o.isMesh&&o.geometry&&(o.geometry.boundingBox||o.geometry.computeBoundingBox(),s.union(o.geometry.boundingBox))}),s.isEmpty())return{w:0,d:0,h:0};let p=s.max.x-s.min.x,f=s.max.y-s.min.y,B=s.max.z-s.min.z;const w=Math.max(p,f,B)<10?1e3:1;return{w:Math.round(p*w),d:Math.round(f*w),h:E?880:Math.round(B*w)}}catch{return{w:0,d:0,h:0}}}function F(e){e.style.width=Math.max(2,String(e.value||"").length)+.6+"ch"}const W={};function ne(e){const t=(n,r)=>{W[n]||(d(n).value=r||""),F(d(n))};t("dW",e.w),t("dD",e.d),t("dH",e.h)}let O=null,R=!1,I=0,k=0,L=!1;async function oe(){try{const e=await fetch(q+encodeURIComponent(A)+".anim.json",{cache:"no-store"});if(!e.ok)return;const t=await e.json();if(!(t&&t.version>=1&&Array.isArray(t.movers)&&t.movers.length))return;const n=new Map;g.traverse(o=>{o&&o.name&&n.set(o.name,o)});const r=o=>String(o).replace(/\s/g,"_").replace(/[\[\]\.:\/]/g,""),s=[],p=[],f=[];for(const o of t.movers){const m=[];for(const c of o.parts||[]){const i=n.get(c)||n.get(r(c));i&&m.push(i)}if(m.length){if(o.kind==="drawer"&&o.slide&&Array.isArray(o.slide.dir)){const c=o.slide.dir,i=Math.hypot(c[0],c[1],c[2])||1,l=o.slide.travelMm!=null?+o.slide.travelMm:450,x=new b.Vector3(c[0]/i*l,c[1]/i*l,c[2]/i*l);for(const a of m)a.matrixAutoUpdate=!0,s.push({n:a,k:"slide",base:a.position.clone(),dv:x});p.push({parts:o.parts,nodes:m,dv:x,comp:[]})}else if(o.hinge&&Array.isArray(o.hinge.point)&&Array.isArray(o.hinge.axis)){const c=o.hinge.point,i=o.hinge.axis,l=Math.hypot(i[0],i[1],i[2])||1,x=new b.Vector3(+c[0],+c[1],+c[2]),a=new b.Vector3(i[0]/l,i[1]/l,i[2]/l),h=(o.hinge.openDeg!=null?+o.hinge.openDeg:110)*Math.PI/180;for(const y of m)y.matrixAutoUpdate=!0,s.push({n:y,k:"swing",base:y.position.clone(),bq:y.quaternion.clone(),pv:x,ax:a,ang:h});f.push({nodes:m})}}}const B=o=>{let m=null;return o.traverse(c=>{c.isMesh&&c.geometry&&(c.geometry.boundingBox||c.geometry.computeBoundingBox(),m=m?m.union(c.geometry.boundingBox):c.geometry.boundingBox.clone())}),m},w=new Set(s.map(o=>o.n));for(const o of p){if((o.parts||[]).some(a=>/__HW/.test(a)))continue;const m=o.dv;if(!(Math.abs(m.y)>Math.abs(m.x)&&Math.abs(m.y)>Math.abs(m.z)))continue;const c=m.y>0?1:-1;let i=null,l=-1/0;for(const a of o.nodes){const h=B(a);if(!h)continue;const y=(h.min.y+h.max.y)/2*c;y>l&&(l=y,i=h)}if(!i)continue;const x=(i.min.y+i.max.y)/2;g.traverse(a=>{if(!a.isMesh||w.has(a)||/__CABIN__/.test(a.name||""))return;for(let y=a.parent;y;y=y.parent)if(w.has(y))return;const h=B(a);h&&h.min.x>=i.min.x+4&&h.max.x<=i.max.x-4&&h.min.z>=i.min.z-35&&h.max.z<=i.max.z+70&&((h.min.y+h.max.y)/2-x)*c<0&&(w.add(a),a.matrixAutoUpdate=!0,s.push({n:a,k:"slide",base:a.position.clone(),dv:o.dv}),o.comp.push(a))})}if(L=!1,f.length&&p.length){const o=i=>i.reduce((l,x)=>{const a=B(x);return a?l?l.union(a):a:l},null),m=f.map(i=>o(i.nodes)).filter(Boolean),c=new Set;for(const i of p){const l=i.dv;if(!(Math.abs(l.y)>Math.abs(l.x)&&Math.abs(l.y)>Math.abs(l.z)))continue;const x=l.y>0?1:-1,a=o([...i.nodes,...i.comp]);if(!a)continue;const h=x>0?a.max.y:a.min.y;m.some(M=>M.min.x<a.max.x&&M.max.x>a.min.x&&M.min.z<a.max.z&&M.max.z>a.min.z&&(h-(x>0?M.max.y:M.min.y))*x<0)&&(L=!0,i.nodes.forEach(M=>c.add(M)),i.comp.forEach(M=>c.add(M)))}if(L)for(const i of s)i.stage=c.has(i.n)?1:0}s.length&&(O=s,d("openBtn").style.display="inline-flex")}catch{}}const T=new b.Quaternion,V=new b.Vector3,C=e=>e<.5?4*e*e*e:1-Math.pow(-2*e+2,3)/2,z=.55;function ie(e){if(O){for(const t of O){let n;L?t.stage===1?n=C(Math.max(0,Math.min(1,(e-z)/(1-z)))):n=C(Math.max(0,Math.min(1,e/z))):n=C(e),t.k==="slide"?(t.n.quaternion.set(0,0,0,1),t.n.position.set(t.base.x+t.dv.x*n,t.base.y+t.dv.y*n,t.base.z+t.dv.z*n)):(T.setFromAxisAngle(t.ax,t.ang*n),V.copy(t.base).sub(t.pv).applyQuaternion(T).add(t.pv),t.n.position.copy(V),t.n.quaternion.copy(T).multiply(t.bq)),t.n.updateMatrix()}try{g&&typeof g.queueRender=="function"?g.queueRender():u.jumpCameraToGoal()}catch{}}}function se(e){cancelAnimationFrame(k);const t=I,n=performance.now(),r=Math.max(150,(L?2300:1400)*Math.abs(e-t));R=e===1;const s=p=>{const f=Math.min(1,(p-n)/r);I=t+(e-t)*f,ie(I),f<1&&(k=requestAnimationFrame(s))};k=requestAnimationFrame(s)}d("openBtn").addEventListener("click",()=>{d("openBtn").classList.toggle("on",!R),d("openLbl").textContent=R?"Open doors":"Close doors",se(R?0:1)});let _=null;function ae(){const e=g&&g.getObjectByName("world");if(!e)return;_=new Map;const t=/__CABIN__([A-Za-z0-9.\-]+)/;for(const n of e.children){const r=t.exec(n.name||"");if(!r||/^OTHERS/i.test(r[1]))continue;const s=new b.Box3;if(n.traverse(f=>{f.isMesh&&f.geometry&&(f.geometry.boundingBox||f.geometry.computeBoundingBox(),s.union(f.geometry.boundingBox))}),s.isEmpty())continue;const p=_.get(r[1]);p?p.union(s):_.set(r[1],s)}}let S=null;u.addEventListener("pointerdown",e=>{S=[e.clientX,e.clientY]}),u.addEventListener("pointerup",e=>{const t=S;if(S=null,!E||!t||!_||!_.size||Math.hypot(e.clientX-t[0],e.clientY-t[1])>8)return;let n=null;try{n=u.positionAndNormalFromPoint(e.clientX,e.clientY)}catch{}if(!n||!n.position)return;const r=new b.Vector3(n.position.x,-n.position.z,n.position.y);let s=null,p=1/0;for(const[f,B]of _){const w=B.distanceToPoint(r);w<p&&(p=w,s=f)}s==null||p>50||(void 0)}),U&&(d("backBtn").style.display="inline-flex",d("backBtn").addEventListener("click",()=>{location.href=location.pathname+"?p="+encodeURIComponent(U)})),u.addEventListener("load",async()=>{if(P.classList.add("done"),g=J(),g){const e=[];g.traverse(t=>{t.name&&/^HingeW\d*-H\d+/.test(t.name)&&e.push(t)}),e.forEach(t=>t.parent&&t.parent.remove(t))}if(ee(),ne(te()),oe(),E){try{ae()}catch{}try{j.lastChild.textContent="Drag to rotate \xB7 tap a cabinet to open it"}catch{}}u.canActivateAR&&d("arBtn").classList.add("show");try{u.requestRender&&u.requestRender()}catch{}},{once:!0}),d("arBtn").addEventListener("click",()=>u.activateAR());const _dim=_initDim(u,document.querySelector(".stage")),_DF={vTop:"top",vLeft:"left",vRight:"right"};const G={vTop:"0deg 0deg 105%",vLeft:"-90deg 90deg 105%",vRight:"90deg 90deg 105%",vIso:H};for(const e of Object.keys(G))d(e).addEventListener("click",()=>{u.cameraTarget="auto",u.cameraOrbit=G[e],u.fieldOfView="11deg";_DF[e]?_dim.show(_DF[e]):_dim.clear()});let X=!1;const Y=()=>{X||(X=!0,j.classList.add("gone"))};u.addEventListener("camera-change",e=>{e.detail.source==="user-interaction"&&Y()}),setTimeout(Y,7e3),d("dimsPlate").classList.add("editing");for(const e of["dW","dD","dH"])d(e).addEventListener("input",()=>{W[e]=!0,F(d(e))}),d(e).addEventListener("focus",t=>{try{t.target.select()}catch{}});K&&D&&(d("copyBtn").classList.add("show"),d("copyBtn").addEventListener("click",async()=>{const e=+d("dW").value||0,t=+d("dD").value||0,n=+d("dH").value||0,r=location.origin+location.pathname+"?p="+encodeURIComponent(A)+"&w="+e+"&d="+t+"&h="+n;try{await navigator.clipboard.writeText(r)}catch{prompt("Customer link:",r)}const s=d("copyOk");s.classList.add("show"),setTimeout(()=>s.classList.remove("show"),1600)}));
+</script>
+</body>
+</html>
