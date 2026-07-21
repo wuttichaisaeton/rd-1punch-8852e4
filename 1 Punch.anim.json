@@ -6,6 +6,42 @@
   {
    "kind": "door",
    "parts": [
+    "D0J10000-039700200796__Body3__CABIN__1NHNNL34-040006440880",
+    "DLJ2H200-039700190811__Body2__CABIN__1NHNNL34-040006440880",
+    "Cup_1___Cup__CABIN__1NHNNL34-040006440880__HW",
+    "Cup_1___cut__CABIN__1NHNNL34-040006440880__HW",
+    "Cup_1___cut_2___CABIN__1NHNNL34-040006440880__HW",
+    "Cup_1___cut_1___CABIN__1NHNNL34-040006440880__HW",
+    "Cup_1___cut-Hal__CABIN__1NHNNL34-040006440880__HW",
+    "Cup_1___cut-Hal_1___CABIN__1NHNNL34-040006440880__HW",
+    "Cup_1___Cup_1___CABIN__1NHNNL34-040006440880__HW",
+    "Cup_1___cut_3___CABIN__1NHNNL34-040006440880__HW",
+    "Cup_1___cut_2_1___CABIN__1NHNNL34-040006440880__HW",
+    "Cup_1___cut_1_1___CABIN__1NHNNL34-040006440880__HW",
+    "Cup_1___cut-Hal_2___CABIN__1NHNNL34-040006440880__HW",
+    "Cup_1___cut-Hal_1_1___CABIN__1NHNNL34-040006440880__HW",
+    "B_1___B__CABIN__1NHNNL34-040006440880__HW",
+    "B_1___B_1___CABIN__1NHNNL34-040006440880__HW",
+    "A_1___A__CABIN__1NHNNL34-040006440880__HW",
+    "A_1___A_1___CABIN__1NHNNL34-040006440880__HW"
+   ],
+   "hinge": {
+    "point": [
+     788.5,
+     -3251.5,
+     468.7
+    ],
+    "axis": [
+     -0.0,
+     -0.0,
+     -1.0
+    ],
+    "openDeg": 90.0
+   }
+  },
+  {
+   "kind": "door",
+   "parts": [
     "DSV2R3-500120_v1__Body2__CABIN__2NCNL0-093120__RH",
     "DSV100-500120_v2__Body4__CABIN__2NCNL0-093120__RH",
     "Cup__Body5__CABIN__2NCNL0-093120__RH__HW",
@@ -601,6 +637,221 @@
      -1.0
     ],
     "openDeg": 90.0
+   }
+  },
+  {
+   "kind": "door",
+   "parts": [
+    "D0J10000-049700200796__Body3__CABIN__DLJ0H300-049700200815",
+    "DLJ2H300-049700190811__Body2__CABIN__DLJ0H300-049700200815"
+   ],
+   "hinge": {
+    "point": [
+     276.5,
+     -586.5,
+     469.0
+    ],
+    "axis": [
+     -0.0,
+     -0.0,
+     -1.0
+    ],
+    "openDeg": 90.0
+   }
+  },
+  {
+   "kind": "door",
+   "parts": [
+    "D0J10000-049700200796__Body3__CABIN__DLJ0H300-049700200815__DUP2",
+    "DLJ2H300-049700190811__Body2__CABIN__DLJ0H300-049700200815__DUP2"
+   ],
+   "hinge": {
+    "point": [
+     -788.5,
+     -2248.5,
+     469.0
+    ],
+    "axis": [
+     -0.0,
+     -0.0,
+     -1.0
+    ],
+    "openDeg": 90.0
+   }
+  },
+  {
+   "kind": "door",
+   "parts": [
+    "D0J10000-052200200796__Body3__CABIN__DLJ0H300-052200200815",
+    "DLJ2H300-052200190811__Body2__CABIN__DLJ0H300-052200200815"
+   ],
+   "hinge": {
+    "point": [
+     -773.5,
+     -587.7,
+     469.0
+    ],
+    "axis": [
+     -0.0,
+     -0.0,
+     -1.0
+    ],
+    "openDeg": 90.0
+   }
+  },
+  {
+   "kind": "door",
+   "parts": [
+    "D0J10000-064700200797__Body3__CABIN__DLJ0H300-064700200815",
+    "DLJ2H400-064700190811__Body2__CABIN__DLJ0H300-064700200815"
+   ],
+   "hinge": {
+    "point": [
+     788.5,
+     -601.5,
+     469.0
+    ],
+    "axis": [
+     -0.0,
+     -0.0,
+     -1.0
+    ],
+    "openDeg": 90.0
+   }
+  },
+  {
+   "kind": "door",
+   "parts": [
+    "D0J10000-049700200796__Body3__CABIN__DRJ0H300-049700200815",
+    "DRJ2H300-049700190811__Body2__CABIN__DRJ0H300-049700200815"
+   ],
+   "hinge": {
+    "point": [
+     -788.5,
+     -1250.4,
+     469.0
+    ],
+    "axis": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "openDeg": 90.0
+   }
+  },
+  {
+   "kind": "door",
+   "parts": [
+    "D0J10000-052200200796__Body3__CABIN__DRJ0H300-052200200815",
+    "DRJ2H300-052200190811__Body2__CABIN__DRJ0H300-052200200815"
+   ],
+   "hinge": {
+    "point": [
+     273.5,
+     -586.5,
+     469.0
+    ],
+    "axis": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "openDeg": 90.0
+   }
+  },
+  {
+   "kind": "door",
+   "parts": [
+    "D0J10000-064700200797__Body3__CABIN__DRJ0H400-064700200815",
+    "DRJ2H4000_0647_0019_0811_R_J_v9__Body2__CABIN__DRJ0H400-064700200815"
+   ],
+   "hinge": {
+    "point": [
+     -788.5,
+     -601.5,
+     469.0
+    ],
+    "axis": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "openDeg": 90.0
+   }
+  },
+  {
+   "kind": "drawer",
+   "parts": [
+    "DSJ10000-089700200387__Body3__CABIN__DSJ0BD10-089700200404",
+    "DSJ2BD10-089700190400__Body2__CABIN__DSJ0BD10-089700200404"
+   ],
+   "slide": {
+    "dir": [
+     -1.0,
+     0.0,
+     0.0
+    ],
+    "travelMm": 40.0
+   }
+  },
+  {
+   "kind": "drawer",
+   "parts": [
+    "DSJ10000-089700200387__Body3__CABIN__DSJ0BD10-089700200404__DUP2",
+    "DSJ2BD10-089700190400__Body2__CABIN__DSJ0BD10-089700200404__DUP2"
+   ],
+   "slide": {
+    "dir": [
+     -1.0,
+     0.0,
+     0.0
+    ],
+    "travelMm": 40.0
+   }
+  },
+  {
+   "kind": "drawer",
+   "parts": [
+    "DSJ10000-089700200387__Body3__CABIN__DSJ0BD30-089700200404",
+    "DSJ2BD30-089700190400__Body2__CABIN__DSJ0BD30-089700200404"
+   ],
+   "slide": {
+    "dir": [
+     -1.0,
+     0.0,
+     0.0
+    ],
+    "travelMm": 40.0
+   }
+  },
+  {
+   "kind": "drawer",
+   "parts": [
+    "DSJ10000-089700200387__Body3__CABIN__DSJ0BD30-089700200404__DUP2",
+    "DSJ2BD30-089700190400__Body2__CABIN__DSJ0BD30-089700200404__DUP2"
+   ],
+   "slide": {
+    "dir": [
+     -1.0,
+     0.0,
+     0.0
+    ],
+    "travelMm": 40.0
+   }
+  },
+  {
+   "kind": "drawer",
+   "parts": [
+    "DSJ10000-019700200797__Body3__CABIN__DSJ0F000-019700200815",
+    "DSJ2F010-019700190811__Body2__CABIN__DSJ0F000-019700200815"
+   ],
+   "slide": {
+    "dir": [
+     -1.0,
+     0.0,
+     0.0
+    ],
+    "travelMm": 40.0
    }
   }
  ],
