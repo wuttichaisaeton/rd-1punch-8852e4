@@ -1,0 +1,3 @@
+# Screenshots the render harness writes as human-readable artifacts.
+# They are regenerated on every run and are never a pass/fail criterion.
+test/*.png
