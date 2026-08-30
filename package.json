@@ -1,0 +1,11 @@
+{
+  "name": "1-punch-viewer",
+  "version": "0.0.0",
+  "private": true,
+  "description": "1 Punch 3D kitchen viewer (static page) plus its headless render harness.",
+  "type": "module",
+  "scripts": {
+    "test": "node test/render.mjs",
+    "serve": "python3 -m http.server 8765"
+  }
+}
